@@ -33,6 +33,8 @@ class AuthenticationController extends Controller
 
             return back()->with('error', 'Invalid Credentials');
         }
+        
+        Auth::login($user);
 
         return redirect()->route('dashboard')->with('success', 'Login successful');
 
@@ -47,5 +49,13 @@ class AuthenticationController extends Controller
         User::create($validated);
         
         return redirect()->route('login')->with('success', 'Registration successful');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login')->with('success', 'Logout succesful');
+
     }
 }

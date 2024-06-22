@@ -14,13 +14,10 @@ Route::controller(AuthenticationController::class)->group(function () {
     Route::post('/register', 'registerAction')->name('register-action');
 });
 
-Route::group(['middleware' => ['auth']], function(){
+// Route::middleware(['auth'])->group(function(){
 
-    Route::controller(DashboardController::class)->group(function () {
-
-        Route::get('/dashboard',  'dashboard')->name('dashboard');
-    });
-
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category',  'category')->name('category');
         Route::get('/create-category',  'createCategory')->name('create-category');
@@ -44,4 +41,4 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/media/{media}',  'viewmedia')->name('view-media');
         Route::patch('/media/{media}',  'updatemedia')->name('update-media');
     });
-});    
+// });    
