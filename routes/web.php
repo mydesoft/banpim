@@ -12,9 +12,10 @@ Route::controller(AuthenticationController::class)->group(function () {
     Route::post('/login',  'loginAction')->name('login-action');
     Route::get('register', 'register')->name('register');
     Route::post('/register', 'registerAction')->name('register-action');
-});
-
-// Route::middleware(['auth'])->group(function(){
+    });
+    
+    Route::middleware(['auth'])->group(function(){
+        Route::get('/logout', 'logout')->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     
@@ -41,4 +42,4 @@ Route::controller(AuthenticationController::class)->group(function () {
         Route::get('/media/{media}',  'viewmedia')->name('view-media');
         Route::patch('/media/{media}',  'updatemedia')->name('update-media');
     });
-// });    
+});    
